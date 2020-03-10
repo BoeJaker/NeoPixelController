@@ -1,3 +1,8 @@
+/*
+
+ Control functions for NeoPixelController.ino
+ 
+ */
 //
 //Control position to byte interface
 //==============================================================

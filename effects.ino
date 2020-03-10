@@ -1,4 +1,9 @@
+/*
 
+ Light effect functions for NeoPixelController.ino
+ 
+ */
+ 
  byte neopix_gamma[] = {
    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1,
