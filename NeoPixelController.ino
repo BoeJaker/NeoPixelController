@@ -49,25 +49,25 @@
 //Menu Position 
 //--------------------
 //
-// Unused menu position labels for screens
-//
-//    String effect_labels[][9] = {
-//      {"White", "Rainbow",  "Wipe",     "Chase",    "Spark",      "Starlight",  "Strobe",   "Fire",     "Dissolve",  },
-//      {"Temp",  "Speed",    "Speed",    "Speed",    "Speed",      "Speed",      "Speed",    "Speed",    "Speed",},
-//      {"Tint",  "Style",    "Variance", "Variance", "Variance",   "Variance",   "Variance", "Variance", "Variance", },
-//      {"Lux",   "Lux",      "Color",    "Color",    "Color",      "Color",      "Color",    "Color",    "Color", },
-//      {"None",  "Gamma",    "Lux",      "Lux",      "Lux",        "Lux",        "Lux",      "Lux",      "Lux",},
-//      {"None",  "None",     "Gamma",    "Gamma",    "Gamma",      "Gamma",      "Gamma",    "Gamma",    "Gamma",  } 
-//    };
-//    
-//    String rainbow_labels[] = {
-//      "Cycle", "Strip", "Center", "Random"
-//    };
-//  
-//    String input_labels[] = {
-//      "FFT", "Gestgure", "Color", "Moisture"
-//    };
-    
+/* Unused menu position labels for screens
+
+   String effect_labels[][9] = {
+     {"White", "Rainbow",  "Wipe",     "Chase",    "Spark",      "Starlight",  "Strobe",   "Fire",     "Dissolve",  },
+     {"Temp",  "Speed",    "Speed",    "Speed",    "Speed",      "Speed",      "Speed",    "Speed",    "Speed",},
+     {"Tint",  "Style",    "Variance", "Variance", "Variance",   "Variance",   "Variance", "Variance", "Variance", },
+     {"Lux",   "Lux",      "Color",    "Color",    "Color",      "Color",      "Color",    "Color",    "Color", },
+     {"None",  "Gamma",    "Lux",      "Lux",      "Lux",        "Lux",        "Lux",      "Lux",      "Lux",},
+     {"None",  "None",     "Gamma",    "Gamma",    "Gamma",      "Gamma",      "Gamma",    "Gamma",    "Gamma",  } 
+   };
+      
+   String rainbow_labels[] = {
+     "Cycle", "Strip", "Center", "Random"
+   };
+  
+   String input_labels[] = {
+     "FFT", "Gestgure", "Color", "Moisture"
+   };
+*/    
     byte menu_position[] = {
      1,1
     };
@@ -150,15 +150,13 @@ union byte2array {
 }
 
 void loop() {
-  byte2array rgb_converter;
+
+  //Battery level check
+  strip.setBrightness(BRIGHTNESS); // Set brightness
+//  byte2array rgb_converter; // Original - this might break option3 below?
   
   // Main Menu 
   //==================================================================================================================
-    
-    //Battery level check
-    //Brightness
-      strip.setBrightness(BRIGHTNESS);
-
     switch (menu_position[0]){ 
       case 1: // Option 1: White - Adjustable color temperature & tint(todo)
         fullWhite(color_temperature);
@@ -172,15 +170,17 @@ void loop() {
       case 3: // Option 3: Color Selector - Allows the user to select a static color
         wheel_pos = incrementer(wheel_pos);
         rgb_converter.integer = Wheel(wheel_pos);
+        byte2array rgb_converter; // Alternative???
         colorWipe(strip.Color(rgb_converter.array[0],rgb_converter.array[1],rgb_converter.array[2]), 50);
         Serial.println(wheel_pos);
       break;
     };
-    //Option 4 - Features - Allows the user to overlay features with compatible colors i.e white, rainbow, color picker
-    // - Sound to light VU
-    // - Sound to light FFT
-    // - Motion to light PIR
-    // - Gesture to light
+    /*Option 4 - Features - Allows the user to overlay features with compatible colors i.e white, rainbow, color picker
+        - Sound to light VU
+        - Sound to light FFT
+        - Motion to light PIR
+        - Gesture to light
+    */
 
     //Menu Navigation
     //================================
@@ -198,20 +198,8 @@ void copy(byte* src, byte* dst, int len) {
     memcpy(dst, src, sizeof(src[0])*len);
 }
 
-    
-    // Some example procedures showing how to display to the pixels:
-    //  colorWipe(strip.Color(255, 0, 0), 50); // Red
-    //  colorWipe(strip.Color(0, 255, 0), 50); // Green
-    //  colorWipe(strip.Color(0, 0, 255), 50); // Blue
-    //  colorWipe(strip.Color(255, 255, 255, 255), 50); // White
-    //
-    //  whiteOverRainbow(20,75,5);  
-    //
-    //  pulseWhite(5); 
-    // delay(2000);
-
+// NEOPIXEL CONNECTION BEST PRACTICES (From: Adafruit Neopixel Uber Guide)
 /*
- * NEOPIXEL CONNECTION BEST PRACTICES (From: Adafruit Neopixel Uber Guide)
  * Before connecting NeoPixels to any large power source (DC “wall wart” or even a large battery), 
  * add a capacitor (1000 µF, 6.3V or higher) across the + and – terminals as shown above. 
  * The capacitor buffers sudden changes in the current drawn by the strip.
