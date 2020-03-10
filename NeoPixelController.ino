@@ -5,6 +5,8 @@
  Displays selected pattern and color on neopixel strings
  Best practice guide at bottom
 
+
+
 */
 
 // Gesture sensing setup
@@ -200,13 +202,13 @@ void copy(byte* src, byte* dst, int len) {
 
 // NEOPIXEL CONNECTION BEST PRACTICES (From: Adafruit Neopixel Uber Guide)
 /*
- * Before connecting NeoPixels to any large power source (DC “wall wart” or even a large battery), 
- * add a capacitor (1000 µF, 6.3V or higher) across the + and – terminals as shown above. 
+ * Before connecting NeoPixels to any large power source (DC â€œwall wartâ€� or even a large battery), 
+ * add a capacitor (1000 ÂµF, 6.3V or higher) across the + and â€“ terminals as shown above. 
  * The capacitor buffers sudden changes in the current drawn by the strip.
  * 
  * Place a 300 to 500 Ohm resistor between the Arduino data output pin and the input to the first NeoPixel. 
  * The resistor should be at the end of the wire closest to the NeoPixel(s), not the microcontroller. 
- * Some products already incorporate this resistor…if you’re not sure, add one…there’s no harm in doubling up!
+ * Some products already incorporate this resistorâ€¦if youâ€™re not sure, add oneâ€¦thereâ€™s no harm in doubling up!
  * 
  * Try to minimize the distance between the Arduino and first pixel, so the signal is clear.  
  * A meter or two is usually no problem. Much longer and things can become unreliable.
