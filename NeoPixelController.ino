@@ -5,8 +5,6 @@
  Displays selected pattern and color on neopixel strings
  Best practice guide at bottom
 
-
-
 */
 
 // Gesture sensing setup
